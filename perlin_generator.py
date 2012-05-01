@@ -5,8 +5,8 @@ from texture_gen import Gradient
 
 # Generates a simple cloud texture from perlin_noise
 def generate_sample_textures():
-	w = h = 1024
-	octaves = 7
+	w = h = 256
+	octaves = 9
 
 	# generate cloud texture
 	gradient = Gradient((1, 1, 1, 1), ((135.0/255.0), (206.0/255.0), (250.0/255.0), 1))
@@ -35,20 +35,12 @@ def write_perlin_to_file(perlin, width, height):
 
 	f.close()
 
-def make_snowy_ground():
-	grass = Image.open('textures/grass.png', 'r')
-	print 'generating perlin noise...'
-	p_noise = perlin_noise_2d(512, 512, 6, .25)
-	print 'blending textures'
-	blend_textures(grass, p_noise, 512, 512)
-
 # Simple prompt which gives user the option to generate sample perlin noise texture
 # or generate a text file with perlin noies values.
 def prompt():
 	print("please choose an option")
 	print("\t1 - Generate sample texture")
 	print("\t2 - Output perlin values to text file")
-	print("\t3 - Blend grass and snow texture")
 
 	selected = input('>')
 	if (selected == 1):
@@ -61,8 +53,6 @@ def prompt():
 		print("Generting perlin noise values please wait")
 		p_noise = perlin_noise_2d(width, height, 9, persistence)
 		write_perlin_to_file(p_noise, width, height)
-	elif(selected == 3):
-		make_snowy_ground()
 	else:
 		prompt()
 

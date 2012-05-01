@@ -66,24 +66,17 @@ def generate_texture(color_grid, fname):
 
 	image.save('2d_noise/' + fname)   
 
-# Interpolates between two textures with the given perlin noise values
-# texture 1 and texture 2 are PIL Image objects
-def blend_textures(texture1, p_noise, width, height):
+# Blends the given texture with white using perlin noise.
+# NOTE: this can be extended to blend two different textures.
+def blend_textures(texture, p_noise, width, height):
 	b_texture = Image.new('RGBA', (width, height))
 	b_pixels = b_texture.load()
-	t1_pixels = texture1.load()
+	t1_pixels = texture.load()
 
 	for i in range(width):
 		for j in range(height):
-			# blend_pixel(t1_pixels[i,j], t2_pixels[i,j], p_noise[i][j])
 			alpha = p_noise[i][j]
 			new_pixel = blend_pixel_with_white(t1_pixels[i,j], p_noise[i][j])
 			b_pixels[i,j] = tuple(new_pixel)
 
 	b_texture.save('blended_texture.png')
-
-def normalize_rgb(rgb):
-	rgb[0] = rgb[0] / 255.0
-	rgb[1] = rgb[1] / 255.0
-	rgb[2] = rgb[2] / 255.0
-	print rgb
