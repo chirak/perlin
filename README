@@ -1,5 +1,5 @@
 This is a python implementation of the perlin noise algorithm which was used
-for a computer graphics project (spring 2012). This main use for this algorithm
+for a computer graphics project (spring 2012). The main use for this algorithm
 was to generate 2D textures in which we could use in a 3D world. To generate a
 sample texture run perlin_generator.py. You will need the Python Imaging Library
 (PIL) installed in order to to run the script. Feel free to play around with the
